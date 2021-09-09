@@ -36,7 +36,7 @@ open class BaseViewHolder : RecyclerView.ViewHolder {
         return view as T
     }
 
-    fun setText(@IdRes id: Int, @Nullable text: String) {
+    fun setText(@IdRes id: Int, @Nullable text: String?) {
         (getView(id) as TextView).text = text
     }
 }
