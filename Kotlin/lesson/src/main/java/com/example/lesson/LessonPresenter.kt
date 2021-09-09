@@ -31,14 +31,14 @@ class LessonPresenter {
         this.activity = activity
     }
 
-    private var lessons = arrayListOf<Lesson>()
+    private var lessons = listOf<Lesson>()
 
     private val type: Type = object : TypeToken<List<Lesson>>(){}.type
 
     fun fetchData() {
         HttpClient.get(LESSON_PATH, type, object : EntityCallback<List<Lesson>> {
             override fun onSuccess(entity: List<Lesson>) {
-                this@LessonPresenter.lessons = lessons
+                this@LessonPresenter.lessons = entity
                 activity?.runOnUiThread {
                     activity?.showResult(lessons)
                 }
