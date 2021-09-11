@@ -78,12 +78,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
  * 怎么判空是比较好的写法？
  */
 fun verify(user: User): Boolean {
-    if (user.username != null && user.username!!.length < 4) {
+    if (user.username?.length ?: 0 < 4) {
         Utils.toast("用户名不合法")
         return false
     }
-    val password = user.password
-    if (password != null && password.length < 4) {
+    if (user.password?.length ?: 0 < 4) {
         Utils.toast("密码不合法")
         return false
     }
