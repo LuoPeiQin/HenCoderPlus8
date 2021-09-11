@@ -22,8 +22,7 @@ import androidx.recyclerview.widget.RecyclerView
  * @Author: lpq
  * @CreateDate: 2021/9/9 10:50
  */
-open class BaseViewHolder : RecyclerView.ViewHolder {
-    constructor(@NonNull itemView: View) : super(itemView)
+open class BaseViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
 
     private val viewHashMap = HashMap<Int, View>()
 

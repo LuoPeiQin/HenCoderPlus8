@@ -22,18 +22,14 @@ import java.lang.reflect.Type
  * @Author: lpq
  * @CreateDate: 2021/9/9 14:59
  */
-class LessonPresenter {
+class LessonPresenter(activity: LessonActivity) {
     private val LESSON_PATH = "lessons"
 
-    private var activity: LessonActivity? = null
-
-    constructor(activity: LessonActivity) {
-        this.activity = activity
-    }
+    private var activity: LessonActivity? = activity
 
     private var lessons = listOf<Lesson>()
 
-    private val type: Type = object : TypeToken<List<Lesson>>(){}.type
+    private val type: Type = object : TypeToken<List<Lesson>>() {}.type
 
     fun fetchData() {
         HttpClient.get(LESSON_PATH, type, object : EntityCallback<List<Lesson>> {
@@ -44,9 +40,9 @@ class LessonPresenter {
                 }
             }
 
-            override fun onFailure(message: String) {
+            override fun onFailure(message: String?) {
                 activity?.runOnUiThread {
-                    Utils.toast(message)
+                    Utils.toast(message ?: "")
                 }
             }
 
@@ -54,12 +50,8 @@ class LessonPresenter {
     }
 
     fun showPlayback() {
-        val playbackLessons = arrayListOf<Lesson>()
-        lessons.forEach {
-            if (it.state == Lesson.State.PLAYBACK) {
-                playbackLessons.add(it)
-            }
-        }
-        activity?.showResult(playbackLessons)
+        activity?.showResult(lessons.filter {
+            it.state == Lesson.State.PLAYBACK
+        })
     }
 }

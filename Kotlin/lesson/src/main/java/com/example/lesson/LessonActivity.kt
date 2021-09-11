@@ -28,12 +28,8 @@ import com.example.lesson.entity.Lesson
  * @Author: lpq
  * @CreateDate: 2021/9/9 14:34
  */
-class LessonActivity : AppCompatActivity(), BaseView<LessonPresenter>, Toolbar.OnMenuItemClickListener {
-    private val lessonPresenter = LessonPresenter(this)
-
-    override fun getPresenter(): LessonPresenter {
-        return lessonPresenter
-    }
+class LessonActivity : AppCompatActivity(), Toolbar.OnMenuItemClickListener {
+    private val lessonPresenter by lazy { LessonPresenter(this) }
 
     private val lessonAdapter = LessonAdapter()
 
@@ -55,12 +51,12 @@ class LessonActivity : AppCompatActivity(), BaseView<LessonPresenter>, Toolbar.O
         refreshLayout = findViewById(R.id.swipe_refresh_layout)
         refreshLayout.setOnRefreshListener(object : SwipeRefreshLayout.OnRefreshListener {
             override fun onRefresh() {
-                getPresenter().fetchData()
+                lessonPresenter.fetchData()
             }
         })
         refreshLayout.isRefreshing = true
 
-        getPresenter().fetchData()
+        lessonPresenter.fetchData()
     }
 
     fun showResult(lessons: List<Lesson>) {
@@ -68,9 +64,8 @@ class LessonActivity : AppCompatActivity(), BaseView<LessonPresenter>, Toolbar.O
         refreshLayout.isRefreshing = false
     }
 
-
-    override fun onMenuItemClick(item: MenuItem): Boolean {
-        getPresenter().showPlayback()
+    override fun onMenuItemClick(item: MenuItem?): Boolean {
+        lessonPresenter.showPlayback()
         return false
     }
 

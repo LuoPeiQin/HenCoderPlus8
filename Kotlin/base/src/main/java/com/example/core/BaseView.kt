@@ -9,5 +9,4 @@ package com.example.core
  * @CreateDate: 2021/9/9 10:32
  */
 interface BaseView<T> {
-    fun getPresenter(): T
 }

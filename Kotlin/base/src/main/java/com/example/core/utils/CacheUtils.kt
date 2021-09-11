@@ -20,7 +20,7 @@ import com.example.core.R
  * @CreateDate: 2021/9/9 10:25
  */
 object CacheUtils {
-    val context = BaseApplication.currentApplication()
+    val context = BaseApplication.currentApplication
 
     private val SP = context.getSharedPreferences(context.getString(R.string.app_name), Context.MODE_PRIVATE)
 

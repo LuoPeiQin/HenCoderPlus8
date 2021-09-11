@@ -7,9 +7,6 @@
  */
 package com.example.core.http
 
-import androidx.annotation.NonNull
-import androidx.annotation.Nullable
-
 /**
  * @ProjectName: Kotlin
  * @Package: com.example.core.http
@@ -19,7 +16,7 @@ import androidx.annotation.Nullable
  * @CreateDate: 2021/9/9 10:14
  */
 interface EntityCallback<T> {
-    fun onSuccess(@NonNull entity: T)
+    fun onSuccess(entity: T)
 
-    fun onFailure(@Nullable message: String)
+    fun onFailure(message: String?)
 }
